@@ -1,4 +1,3 @@
-# Chord_Protocol_Java
 ***********************Project Title*****************************
 Chord Protocol : Implementation of chord protocol over collection of nodes in java.Both node join 
 and node deletion is implemented. In this node will leave gracefully i.e by notifying his fellow node.Also this is reliable as file is also distributed to fellow node before leaving.
