@@ -228,8 +228,9 @@ class HandleRequest implements Runnable
 				e.printStackTrace();
 				return;
 			}
+			Chord.display();
 			
-		}
+		}	
 		
 	}
 	
