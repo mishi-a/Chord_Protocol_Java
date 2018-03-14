@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.Scanner;
 import javax.xml.bind.DatatypeConverter;
 import java.math.BigInteger;
-
+import java.net.InetAddress;
 //A chord implementation with m=5 i.e 32 node maxm
 
 class HandleRequest implements Runnable 
@@ -82,11 +82,11 @@ class HandleRequest implements Runnable
 					int p1 = Integer.parseInt(data[1]);
 					int n = Chord.SHA1("localhost:"+p1);
 					boolean flag1 =false;
-					if((id+1)%32<=(old-1+32)%32)
-						flag1 = node.isInterval((id+1)%32,(old-1+32)%32,n);
+					if((id)%32<=(old-1+32)%32)
+						flag1 = node.isInterval((id)%32,(old-1+32)%32,n);
 					else
 					{
-						flag1 = node.isInterval((id+1)%32,31,n);
+						flag1 = node.isInterval((id)%32,31,n);
 						if(flag1 == false)
 							flag1 = node.isInterval(0,(old-1+32)%32,n);
 					}
@@ -139,9 +139,9 @@ class HandleRequest implements Runnable
 						if(flag == false)
 							flag = node.isInterval(0,(z-1+32)%32,s);
 					}
-					if(z==0&&(node.nodeId+1)%32==0)
+					if(z==(node.nodeId+1)%32)
 						flag = false;
-					if(flag&&s!=node.nodeId)
+					if(flag&&s!=node.nodeId&&data.length==4)
 					{
 						k = 1;
 						if(data.length==4)
@@ -158,7 +158,7 @@ class HandleRequest implements Runnable
 						if(prePort != node.nodePort&&prePort!=Integer.parseInt(data[3]))
 							Request.makeRequest(prePort,"update:"+s+":"+i+":"+data[3]);
 					}
-					if(k==0 && flag == false && s-(z)==0 && data.length==5)
+					if(s-(z)==0 && data.length==5)
 					{
 							Fingers.table[i][3]=Chord.SHA1("localhost:"+data[4]);
 							Fingers.table[i][4] = Integer.parseInt(data[4]);
@@ -230,7 +230,7 @@ class HandleRequest implements Runnable
 			}
 			Chord.display();
 			
-		}	
+		}
 		
 	}
 	
@@ -492,15 +492,14 @@ class node
 			int n = Chord.SHA1("localhost:"+port);
 			boolean flag1 =false;
 			//Check Interval
-			if((id+1)%32<=(old-1)%32)
-				flag1 = node.isInterval((id+1)%32,(old-1)%32,n);
+			if((id)%32<=(old-1+32)%32)
+				flag1 = node.isInterval((id)%32,(old-1+32)%32,n);
 			else
 			{
-				flag1 = node.isInterval((id+1)%32,31,n);
+				flag1 = node.isInterval((id)%32,31,n);
 				if(flag1 == false)
-					flag1 = node.isInterval(0,(old-1)%32,id);
+					flag1 = node.isInterval(0,(old-1+32)%32,n);
 			}
-
 			if(flag1)
 			{
 				old = n;
@@ -511,7 +510,7 @@ class node
             	old1 = node.successorPort;
             	old = node.successorId;
             }
-            System.out.println("****Successor Of it's Predecessor i.e"+n+" is "+old+"****");
+            System.out.println("****Successor Of it's Predecessor i.e"+node.nodeId+" is "+old+"****");
 			return old1+":"+pred;
 		}
 		int predSuc = Integer.parseInt(Request.makeRequest(pred,"successor:"+port+":"+id+":"+flag));
@@ -561,7 +560,7 @@ public class Chord
 	   System.out.println("4.Its own finger table");
 	   System.out.println("5.To leave network");
    }
-   public static void main(String[] args) 
+   public static void main(String[] args) throws UnknownHostException
    { 
 	 Fingers fingerTable;  
 	 Scanner in = new Scanner(System.in);  
@@ -627,12 +626,13 @@ public class Chord
 		 int choice = in.nextInt();
 		 if(choice == 1)
 		 {
-			 System.out.println("Host Ip is: localhost:"+node.nodePort+" and SHA1 id is "+node.nodeId);
+		 	 //InetAddress address = InetAddress.getByName("localhost"); 	
+			 System.out.println("Host Ip is: " +InetAddress.getLocalHost().getHostAddress()+":"+node.nodePort+" and SHA1 id is "+node.nodeId);
 		 }
 		 else if(choice == 2)
 		 {
-			 System.out.println("PREDECESSOR--Ip is localhost:"+node.predecessorPort+" SHA1 Id is "+node.predecessorId);
-			 System.out.println("SUCCESSOR--Ip is localhost:"+node.successorPort+" SHA1 Id is "+node.successorId);
+			 System.out.println("PREDECESSOR--Ip is " +InetAddress.getLocalHost().getHostAddress()+":"+node.predecessorPort+" SHA1 Id is "+node.predecessorId);
+			 System.out.println("SUCCESSOR--Ip is "+ InetAddress.getLocalHost().getHostAddress()+":"+node.successorPort+" SHA1 Id is "+node.successorId);
 		 }
 		 else if(choice == 3)
 		 {
