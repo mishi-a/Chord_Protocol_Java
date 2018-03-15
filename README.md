@@ -31,10 +31,14 @@ it creates 100 file in nodeFile folder of particular node.
 To know the port number either look in code or Enter 1 when display menu comes.
 
 darkmatter@hp-15:~/Dropbox/Chord/1$ java Chord 
+
 ****Node Joined in Network and Id assigned to it is ****16
+
 Enter Port number if you Know someone else enter -1
 -1
+
 ****Finger table intialized for this node****
+
 Enter respective choices
 1. own IP address and ID
 2.The IP address and ID of the successor and predecessor.
