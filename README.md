@@ -3,13 +3,13 @@
 Chord Protocol : Implementation of chord protocol over collection of nodes in java.Both node join 
 and node deletion is implemented. In this node will leave gracefully i.e by notifying his fellow node.Also this is reliable as file is also distributed to fellow node before leaving.
 
-************************Getting Started***************************
+# Getting Started
 There are four folder named 1,2,3,4 representing 4 different nodes and each node contain a folder nodeFile which stores the file of a particular node.Also each folder contain script to generate 100 file which is used later.
 
-***********************PreRequisites*******************************
+# PreRequisites
 Java and nothing else
 
-***********************Running the tests**************************
+# Running the tests
 Navigate to each folder and open a terminal in each folder.Each terminal basically represents a node.
 
 use this command :
@@ -37,7 +37,6 @@ Enter respective choices
 4.Its own finger table
 5.To leave network
 
-
-************************************************************************
+#
 In order to extend this to more number of node just create another folder with chord.java file and nodeFile folder plus filecreator.sh and change the port in code an try to avoid collision of id's with previous node.
 
