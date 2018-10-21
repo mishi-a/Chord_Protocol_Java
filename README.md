@@ -2,7 +2,7 @@
 
 # Project Title
 
-Chord Protocol : Implementation of chord protocol over collection of nodes in java.Both node join 
+Chord Protocol: Implementation of chord protocol over collection of nodes in java.Both node join 
 and node deletion is implemented. In this node will leave gracefully i.e by notifying his fellow node.Also this is reliable as file is also distributed to fellow node before leaving.
 
 # Getting Started
@@ -17,20 +17,20 @@ Java and nothing else
 
 Navigate to each folder and open a terminal in each folder.Each terminal basically represents a node.
 
-use this command :
-darkmatter@hp-15:~/Dropbox/Chord/1$ javac Chord.java 
-darkmatter@hp-15:~/Dropbox/Chord/1$ java Chord 
+use this command:
+$ ~/Dropbox/Chord/1$ javac Chord.java 
+$ ~/Dropbox/Chord/1$ java Chord 
 ****Node Joined in Network and Id assigned to it is ****16
 Enter Port number if you Know someone else enter -1
 
 if it's the first node first use :
-darkmatter@hp-15:~/Dropbox/Chord/1$ sh fileCreator.sh
+$ ~/Dropbox/Chord/1$ sh fileCreator.sh
 
 it creates 100 file in nodeFile folder of particular node.
 
 To know the port number either look in code or Enter 1 when display menu comes.
 
-darkmatter@hp-15:~/Dropbox/Chord/1$ java Chord 
+$ ~/Dropbox/Chord/1$ java Chord 
 
 ****Node Joined in Network and Id assigned to it is ****16
 
